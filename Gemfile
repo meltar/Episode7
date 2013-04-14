@@ -3,5 +3,5 @@ source 'https://rubygems.org'
 gem 'rake'
 gem 'rspec'
 gem 'activesupport'
-gem 'geocoder'
-gem 'benchmark'
+gem "geocoder"
+gem 'nokogiri'

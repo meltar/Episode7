@@ -1,4 +1,10 @@
 require 'geocoder'
+
+Geocoder.configure(
+  lookup: :bing,
+  api_key: 'AkTjVpt-Si67rkjRTerrBqnmMIJSwWAEXSsoMJQMHa3ZO1rbHbECo1crQ_iuGTg-'
+)
+
 class Map
 
   def self.search(terms)

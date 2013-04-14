@@ -4,8 +4,11 @@ class CalculatesRoute
 
     remaining_points = points
     route = []
-    start_index = remaining_points.index(start_point)
-    route << remaining_points.slice!(remaining_points.index(start_point))
+    if start_point.nil?
+      route << remaining_points.slice!(0)
+    else
+      route << remaining_points.slice!(remaining_points.index(start_point))
+    end
     until remaining_points == [] do 
       next_point = shortest_distance(route.last, remaining_points)
       route << remaining_points.slice!(remaining_points.index(next_point))

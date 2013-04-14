@@ -7,6 +7,7 @@ class Place
     results = Map.search(name)
     Place.new.tap do |p|
       p.name = name
+      #puts "Coords: #{results.coordinates}"
       p.coordinates = results.coordinates
     end
   end
