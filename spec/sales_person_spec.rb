@@ -16,15 +16,24 @@ describe SalesPerson do
     }.to change(subject.cities,:count).by(1) 			
   end
 
+  it "should find a city using a name entered by the user" do
+    city = stub
+    city.stub(name:"Atlanta, GA")
+    subject.schedule_city(city)
+    subject.find_city("Atlanta, GA").should eq(city)
+  end
+
   it "should calculate a route via the CalculatesRoute" do
-    cities = [stub, stub, stub]
+    start = stub("Atlanta, GA")
+    cities = [start, stub, stub]
     subject.stub(:cities) { cities } 
-    CalculatesRoute.should_receive(:calculate).with(cities)
-    subject.route
+    CalculatesRoute.should_receive(:calculate).with(cities, nil)
+    subject.route(start)
   end
   it "should returns the route from CalculatesRoute" do
-    route_stub = [stub, stub]
+    route_stub = [stub("Marietta, GA"), stub("Atlanta, GA")]
+    start = stub("Marietta, GA")
     CalculatesRoute.stub(:calculate) { route_stub }
-    subject.route.should eq(route_stub)
+    subject.route(start).should eq(route_stub)
   end
 end

@@ -10,6 +10,7 @@ describe CalculatesRoute do
   it "should calculate the route" do
     points = [dallas, el_paso, austin, lubbock]
     expected = [dallas, austin, lubbock, el_paso]
-    CalculatesRoute.calculate(points).should eq(expected)
+    start_point = dallas
+    CalculatesRoute.calculate(points, start_point).should eq(expected)
   end
 end
