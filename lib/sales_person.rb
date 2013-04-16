@@ -10,11 +10,18 @@ class SalesPerson
   end
 
   def find_city(city_name)
-    found = @cities.select {|city| city if city.name == city_name}
+    found = cities.select {|city| city if city.name == city_name}
     found.first
   end
 
   def route(start)
-    CalculatesRoute.calculate(cities, find_city(start))
+    city = find_city(start)
+    vals = CalculatesRoute.calculate(cities, city)
+    results = {route: vals.fetch(:route), time: traveling_time(vals.fetch(:distance)) }
   end
+
+  def traveling_time(distance)
+    time = distance / 55
+  end
+
 end

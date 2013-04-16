@@ -2,7 +2,8 @@ require 'geocoder'
 
 Geocoder.configure(
   lookup: :bing,
-  api_key: 'AkTjVpt-Si67rkjRTerrBqnmMIJSwWAEXSsoMJQMHa3ZO1rbHbECo1crQ_iuGTg-'
+  api_key: 'AkTjVpt-Si67rkjRTerrBqnmMIJSwWAEXSsoMJQMHa3ZO1rbHbECo1crQ_iuGTg-',
+  timeout: 10
 )
 
 class Map

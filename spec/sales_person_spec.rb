@@ -24,16 +24,20 @@ describe SalesPerson do
   end
 
   it "should calculate a route via the CalculatesRoute" do
-    start = stub("Atlanta, GA")
-    cities = [start, stub, stub]
+    start = stub(name: "Atlanta, GA")
+    last = stub(name: "Marietta, GA")
+    cities = [start, last]
     subject.stub(:cities) { cities } 
-    CalculatesRoute.should_receive(:calculate).with(cities, nil)
-    subject.route(start)
+    CalculatesRoute.should_receive(:calculate).with(cities, start)
+    subject.route("Atlanta, GA")
   end
-  it "should returns the route from CalculatesRoute" do
+
+  it "should return the route from CalculatesRoute" do
     route_stub = [stub("Marietta, GA"), stub("Atlanta, GA")]
     start = stub("Marietta, GA")
     CalculatesRoute.stub(:calculate) { route_stub }
+    CalculatesRoute.stub(:route).and_return(route_stub)
     subject.route(start).should eq(route_stub)
   end
+
 end

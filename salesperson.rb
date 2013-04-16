@@ -23,8 +23,12 @@ puts "Where should the person start?"
 puts
 start = gets.chomp
 if (start.empty? == false)
+	vals =  phil.route(start)
 	puts "The route starting at #{start}:\n"
-	puts phil.route(start)
+	puts vals.fetch(:route)
+	travel = vals.fetch(:time)
+	puts "Total traveling time in hours: #{vals.fetch(:time).round(2)}"
+
 end
 
 texas_cities = []
@@ -32,7 +36,6 @@ doc = Nokogiri::HTML(open('http://www.texas.gov/en/discover/Pages/topic.aspx?top
 doc.css(".TGOV_SCRD_Header a").map do |node|
   texas_cities << node.content
 end
-puts "Texas city count: #{texas_cities.count}"
 
 bench_vals = [2, 10, 50, 200]
 bench_vals.each do |val|
@@ -45,11 +48,11 @@ bench_vals.each do |val|
 	puts "\nBenchmarking results for #{val} cities:"
 	Benchmark.bm do |x|
 		x.report do
-			the_route = current.route(nil)
+			vals = current.route(nil)
 		end
 		puts "The route:"
-		puts the_route
+		puts vals.fetch(:route)
+		travel = vals.fetch(:time)
+		puts "Total traveling time in hours: #{vals.fetch(:time).round(2)}"
 	end
 end
-
-

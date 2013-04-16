@@ -10,7 +10,12 @@ describe CalculatesRoute do
   it "should calculate the route" do
     points = [dallas, el_paso, austin, lubbock]
     expected = [dallas, austin, lubbock, el_paso]
-    start_point = dallas
-    CalculatesRoute.calculate(points, start_point).should eq(expected)
+    CalculatesRoute.calculate(points, "dallas").fetch(:route).should eq(expected)
+  end
+
+  it "should log the total miles" do
+    points = [dallas, el_paso, austin, lubbock]
+    vals = CalculatesRoute.calculate(points, "Austin, TX")
+    vals.fetch(:distance).should_not be(0)
   end
 end
